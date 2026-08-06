@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:include schemaLocation="common-types.xsd"/>
+    <xs:include schemaLocation="line-item.xsd"/>
+
+    <xs:element name="Order">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="orderId" type="xs:string"/>
+                <xs:element name="customerId" type="xs:string"/>
+                <xs:element name="shippingAddress" type="AddressType"/>
+                <xs:element name="currency" type="CurrencyCodeType"/>
+                <xs:element name="lineItems" type="LineItemType" maxOccurs="unbounded"/>
+                <xs:element name="totalCents" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:include schemaLocation="discount-rules.xsd"/>
+
+</xs:schema>
