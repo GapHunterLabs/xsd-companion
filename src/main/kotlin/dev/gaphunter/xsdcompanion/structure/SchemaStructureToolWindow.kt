@@ -9,6 +9,7 @@ import com.intellij.openapi.wm.ToolWindow
 import com.intellij.psi.PsiManager
 import com.intellij.psi.xml.XmlFile
 import com.intellij.ui.treeStructure.Tree
+import com.intellij.util.ui.JBUI
 import dev.gaphunter.xsdcompanion.detection.XsdWsdlDetector
 import java.awt.BorderLayout
 import javax.swing.JPanel
@@ -36,6 +37,7 @@ class SchemaStructureToolWindow(private val project: Project, toolWindow: ToolWi
     private val tree = Tree(treeModel)
 
     init {
+        component.border = JBUI.Borders.empty(8)
         tree.isRootVisible = true
         component.add(JScrollPane(tree), BorderLayout.CENTER)
         subscribeToEditorChanges(toolWindow)
