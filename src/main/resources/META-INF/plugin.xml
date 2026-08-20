@@ -34,6 +34,7 @@
         <annotator language="XML" implementationClass="dev.gaphunter.xsdcompanion.highlighting.SchemaLocationAnnotator"/>
         <toolWindow id="XSD Structure"
                     anchor="right"
+                    icon="/icons/toolWindow.svg"
                     factoryClass="dev.gaphunter.xsdcompanion.structure.SchemaStructureToolWindowFactory"/>
     </extensions>
 </idea-plugin>
