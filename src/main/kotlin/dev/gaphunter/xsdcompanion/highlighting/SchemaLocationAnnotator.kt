@@ -7,6 +7,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.xml.XmlAttributeValue
 import dev.gaphunter.xsdcompanion.reference.SchemaLocationReference
 import dev.gaphunter.xsdcompanion.reference.SchemaLocationUtil
+import dev.gaphunter.xsdcompanion.review.ReviewPrompt
 
 /**
  * Flags a `schemaLocation` value that fails to resolve to a real local
@@ -30,6 +31,9 @@ class SchemaLocationAnnotator : Annotator {
             holder.newAnnotation(HighlightSeverity.WARNING, "Cannot resolve schemaLocation '${value.value}'")
                 .range(value.textRange)
                 .create()
+            val file = value.containingFile
+            val lineNumber = file.viewProvider.document?.getLineNumber(value.textRange.startOffset)?.plus(1) ?: 0
+            ReviewPrompt.recordHit(file.project, "${file.virtualFile?.path}:$lineNumber:${value.value}")
         }
     }
 }
