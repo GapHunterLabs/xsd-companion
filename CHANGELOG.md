@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.1.3]
+
+### Added
+
+- Review/star CTA: after 10 distinct real unresolved `schemaLocation`
+  findings, a one-time notification asks whether to rate the plugin on
+  Marketplace, with a permanent "Don't ask again" option. Standard
+  mechanism used catalog-wide since 2026-08-24 (`CONSTITUTION.md`
+  §7.2), rolled out to this plugin now.
+
 ## [0.1.2]
 
 ### Fixed
@@ -35,6 +45,8 @@
   file-extension guessing.
 - No telemetry, no license prompts, no network access.
 
-[Unreleased]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.3...HEAD
+[0.1.3]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.2...0.1.3
+[0.1.2]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/GapHunterLabs/xsd-companion/commits/0.1.0

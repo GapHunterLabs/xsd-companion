@@ -29,6 +29,7 @@
     <depends>com.intellij.modules.xml</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="XSD Companion" displayType="BALLOON"/>
         <psi.referenceContributor language="XML"
             implementation="dev.gaphunter.xsdcompanion.reference.SchemaLocationReferenceContributor"/>
         <annotator language="XML" implementationClass="dev.gaphunter.xsdcompanion.highlighting.SchemaLocationAnnotator"/>
