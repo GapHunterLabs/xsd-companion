@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.2.0]
+
+### Added
+
+- Recognizes `<xs:override>` (XSD 1.1's replacement for `<xs:redefine>`)
+  as a `schemaLocation`-bearing element -- go-to-definition, the
+  unresolved-reference warning, and the XSD Structure tool window's
+  graph traversal all now cover it, alongside the existing
+  include/import/redefine.
+
 ## [0.1.3]
 
 ### Added
@@ -45,7 +55,8 @@
   file-extension guessing.
 - No telemetry, no license prompts, no network access.
 
-[Unreleased]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.3...HEAD
+[Unreleased]: https://github.com/GapHunterLabs/xsd-companion/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.3...0.2.0
 [0.1.3]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.0...0.1.1

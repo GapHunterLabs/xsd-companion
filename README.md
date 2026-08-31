@@ -32,7 +32,8 @@ fewer), not assumptions:
   not an extra dependency to pull in.
 - **Real go-to-definition for `schemaLocation`.** Ctrl+Click (or
   Ctrl+B) on any `schemaLocation` value in `<xs:include>`/`<xs:import>`/
-  `<xs:redefine>` navigates to the real target file, resolved purely
+  `<xs:redefine>`/`<xs:override>` (XSD 1.1's replacement for
+  `redefine`) navigates to the real target file, resolved purely
   against local `VirtualFile`s (same pattern already proven in
   json-schema-companion/openapi-companion/asyncapi-companion). An
   unresolvable `schemaLocation` is flagged with a warning — the direct

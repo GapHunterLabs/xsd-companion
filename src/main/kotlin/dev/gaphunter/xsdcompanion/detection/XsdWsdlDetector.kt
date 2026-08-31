@@ -25,5 +25,5 @@ object XsdWsdlDetector {
     }
 
     fun isSchemaLocationTag(localName: String): Boolean =
-        localName == "include" || localName == "import" || localName == "redefine"
+        localName == "include" || localName == "import" || localName == "redefine" || localName == "override"
 }

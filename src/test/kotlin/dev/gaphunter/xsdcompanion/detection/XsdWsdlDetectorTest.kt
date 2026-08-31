@@ -58,6 +58,7 @@ class XsdWsdlDetectorTest : BasePlatformTestCase() {
         assertTrue(XsdWsdlDetector.isSchemaLocationTag("include"))
         assertTrue(XsdWsdlDetector.isSchemaLocationTag("import"))
         assertTrue(XsdWsdlDetector.isSchemaLocationTag("redefine"))
+        assertTrue(XsdWsdlDetector.isSchemaLocationTag("override"))
         assertFalse(XsdWsdlDetector.isSchemaLocationTag("element"))
     }
 }
