@@ -37,6 +37,39 @@ class SchemaLocationAnnotatorTest : BasePlatformTestCase() {
         )
     }
 
+    fun testNoWarningForAResolvableOverride() {
+        myFixture.addFileToProject(
+            "base.xsd",
+            """
+            <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"/>
+            """.trimIndent(),
+        )
+        myFixture.configureByText(
+            "root.xsd",
+            """
+            <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <xs:override schemaLocation="base.xsd"/>
+            </xs:schema>
+            """.trimIndent(),
+        )
+        assertTrue(
+            "expected no unresolved-schemaLocation warning for xs:override, got: ${warnings()}",
+            warnings().none { it.contains("Cannot resolve schemaLocation") },
+        )
+    }
+
+    fun testFlagsAnUnresolvableOverride() {
+        myFixture.configureByText(
+            "root.xsd",
+            """
+            <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <xs:override schemaLocation="doesNotExist.xsd"/>
+            </xs:schema>
+            """.trimIndent(),
+        )
+        assertTrue(warnings().any { it.contains("Cannot resolve schemaLocation") && it.contains("doesNotExist.xsd") })
+    }
+
     fun testFlagsAnUnresolvableInclude() {
         myFixture.configureByText(
             "root.xsd",
