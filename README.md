@@ -5,24 +5,32 @@ XSD/WSDL schemas split across multiple files.
 
 ## Why it exists
 
-Born from real evidence in JetBrains Marketplace reviews of a paid
-XSD/WSDL visualizer plugin (~$10/month, 69% of reviews at 3 stars or
-fewer), not assumptions:
+Multi-file schemas are where XSD/WSDL tooling tends to give up. The
+long-standing paid option in this niche, XSD / WSDL Visualizer (36,897
+downloads, freemium), collected reviews saying so:
 
-- "Pretty useless tool, not recognizing correlations between multiple
-  xsd files in same folder... I consider this as a joke."
-- "I need to visualize complex wsdl (xsd was splitted to more files) and
-  this was not able to parse it."
-- "Unusable with big / complex wsdl files."
-- "Not optimized at all on big WSDL files as it is REALLY slow."
-- "The pricing is way off compared to the benefit."
+- *"Pretty useless tool, not recognizing correlations between multiple
+  xsd files in same folder..."* (June 2025)
+- *"I need to visualize complex wsdl (xsd was splitted to more files) and
+  this was not able to parse it."*
+- *"Not optimized at all on big WSDL files as it is REALLY slow."*
+
+Checked again on 2026-09-22: 9 of its 13 reviews are 3 stars or fewer,
+and its 2026.1 release (March 2026) says "Tree View now supports
+multi-file schemas" and "Single-file schemas are now free" -- so those
+complaints are being worked on, and the comparison is dated on purpose
+rather than left to imply a current state.
+
+What this plugin does, regardless of that: the whole include/import
+graph, `.xsd` and `.wsdl` alike, free, with no network access.
 
 ## Why built this way
 
 - **Real content-based detection, not extension guessing.** A file is
   recognized as XSD/WSDL by its actual root-element namespace
-  (`http://www.w3.org/2001/XMLSchema` or
-  `http://schemas.xmlsoap.org/wsdl/`), so a split schema stored as
+  (`http://www.w3.org/2001/XMLSchema`, or WSDL 1.1's
+  `http://schemas.xmlsoap.org/wsdl/` and WSDL 2.0's
+  `http://www.w3.org/ns/wsdl`), so a split schema stored as
   plain `.xml` is still recognized, and a `.xsd`-named file with
   unrelated content never is.
 - **Built on the bundled XML plugin's real PSI** (`XmlTag`/`XmlFile`/
@@ -51,12 +59,31 @@ fewer), not assumptions:
   ever shown as unresolved, same non-network stance as this catalog's
   other `$ref`/reference-resolution plugins.
 
+## What a WSDL needs that an XSD does not
+
+A WSDL is not simply "an XSD with extra elements", and both differences
+matter for a multi-file schema:
+
+- **The schema is nested.** It lives under `<wsdl:types>`, not at the
+  root, so anything that reads only the root element's own children
+  finds no declarations in a WSDL at all. A WSDL may also carry more
+  than one `<xs:schema>`, one per namespace.
+- **It splits with a different attribute.** `<wsdl:import>` carries
+  `location`, not `schemaLocation`. The schema imports nested inside
+  `<wsdl:types>` keep using `schemaLocation`, so a real WSDL project
+  mixes both in one file.
+
+Both are followed here, and `location` on an unrelated element (a
+`<soap:address>` service endpoint, say) is deliberately not treated as a
+file reference.
+
 ## Usage
 
 Open any `.xsd`/`.wsdl` file (or a plain `.xml` file with a real XML
-Schema/WSDL root). Ctrl+Click any `schemaLocation` value to jump to the
-referenced file. Open the "XSD Structure" tool window (right side) to
-see the full resolved structure across every included/imported file.
+Schema/WSDL root). Ctrl+Click any `schemaLocation` value, or a
+`<wsdl:import>`'s `location`, to jump to the referenced file. Open the
+"XSD Structure" tool window (right side) to see the full resolved
+structure across every included/imported file.
 
 ## Enterprise / Team Licensing
 

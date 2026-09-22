@@ -5,15 +5,18 @@ import com.intellij.psi.xml.XmlAttributeValue
 import com.intellij.psi.xml.XmlFile
 import dev.gaphunter.xsdcompanion.detection.XsdWsdlDetector
 
-/** Shared "is this a `schemaLocation` value inside a recognized XSD/WSDL file" check. */
+/**
+ * Shared "does this attribute value point at another schema file" check:
+ * `schemaLocation` on `<xs:include>`/`<xs:import>`/`<xs:redefine>`/
+ * `<xs:override>`, and `location` on `<wsdl:import>`, inside a file
+ * recognized as XSD or WSDL.
+ */
 object SchemaLocationUtil {
 
     fun asSchemaLocationValue(element: XmlAttributeValue): XmlAttributeValue? {
         val attribute = element.parent as? XmlAttribute ?: return null
-        if (attribute.localName != "schemaLocation") return null
-
         val tag = attribute.parent ?: return null
-        if (!XsdWsdlDetector.isSchemaLocationTag(tag.localName)) return null
+        if (attribute.localName != XsdWsdlDetector.locationAttributeFor(tag)) return null
 
         val file = element.containingFile as? XmlFile ?: return null
         if (!XsdWsdlDetector.isXsdOrWsdl(file)) return null

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="urn:acme:orders"
+                  targetNamespace="urn:acme:orders">
+
+    <!-- A WSDL splits across files with `location`, not `schemaLocation`. -->
+    <wsdl:import namespace="urn:acme:orders:types" location="order-types.wsdl"/>
+
+    <wsdl:types>
+        <xs:schema targetNamespace="urn:acme:orders">
+            <!-- ...while the schema nested here uses `schemaLocation`. -->
+            <xs:import namespace="urn:acme:common" schemaLocation="common-types.xsd"/>
+
+            <xs:element name="GetOrderRequest" type="xs:string"/>
+            <xs:element name="GetOrderResponse" type="xs:string"/>
+
+            <!-- Unresolved on purpose: shows the inline warning. -->
+            <xs:import namespace="urn:acme:missing" schemaLocation="not-here.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="GetOrderRequestMessage">
+        <wsdl:part name="body" element="tns:GetOrderRequest"/>
+    </wsdl:message>
+
+    <wsdl:portType name="OrderPortType">
+        <wsdl:operation name="GetOrder">
+            <wsdl:input message="tns:GetOrderRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:service name="OrderService">
+        <wsdl:port name="OrderPort" binding="tns:OrderBinding">
+            <!-- `location` here is a service endpoint, not a file: it must
+                 NOT be treated as a broken reference. -->
+            <soap:address location="http://acme.example.com/orders"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

@@ -7,20 +7,20 @@
         <p>Go-to-definition and a real structure tree for XSD/WSDL schemas
         split across multiple files — resolved through
         <code>&lt;xs:include&gt;</code>/<code>&lt;xs:import&gt;</code>/
-        <code>&lt;xs:redefine&gt;</code>, entirely against local files.</p>
-        <p>Built from real evidence in JetBrains Marketplace reviews of a
-        paid XSD/WSDL visualizer plugin (~$10/month, 69% of reviews at 3
-        stars or fewer): "not recognizing correlations between multiple
-        xsd files in same folder", "I need to visualize complex wsdl (xsd
-        was splitted to more files) and this was not able to parse it",
-        and "not optimized at all on big WSDL files as it is REALLY
-        slow."</p>
-        <p>Ctrl+Click (or Ctrl+B) on any <code>schemaLocation</code> value
-        navigates straight to the referenced file — unresolved locations
-        are flagged inline. The "XSD Structure" tool window follows the
-        active editor and shows every element/complexType/simpleType/
-        attributeGroup/group declared across the whole include/import
-        graph, not just the one file currently open.</p>
+        <code>&lt;xs:redefine&gt;</code>/<code>&lt;xs:override&gt;</code> and
+        <code>&lt;wsdl:import&gt;</code>, entirely against local files.</p>
+        <p>Works the same whether the schema is one file or forty, and
+        whether it is an <code>.xsd</code> or a <code>.wsdl</code>: inside a
+        WSDL the schema sits under <code>&lt;wsdl:types&gt;</code>, and a WSDL
+        splits across files through <code>&lt;wsdl:import location="..."&gt;</code>
+        rather than <code>schemaLocation</code>. Both are followed.</p>
+        <p>Ctrl+Click (or Ctrl+B) on any <code>schemaLocation</code> or
+        <code>&lt;wsdl:import&gt;</code> <code>location</code> value navigates
+        straight to the referenced file — unresolved locations are flagged
+        inline, naming the attribute that failed. The "XSD Structure" tool
+        window follows the active editor and shows every element/complexType/
+        simpleType/attributeGroup/group declared across the whole
+        include/import graph, not just the one file currently open.</p>
         <p>Free. No license nags, no telemetry, no network access —
         an <code>http(s)://</code> schemaLocation is never fetched, only
         ever shown as unresolved.</p>
