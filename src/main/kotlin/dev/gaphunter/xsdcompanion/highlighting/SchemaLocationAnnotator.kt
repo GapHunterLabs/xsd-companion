@@ -28,7 +28,10 @@ class SchemaLocationAnnotator : Annotator {
         if (value.value.isBlank()) return
 
         if (SchemaLocationReference(value).resolve() == null) {
-            holder.newAnnotation(HighlightSeverity.WARNING, "Cannot resolve schemaLocation '${value.value}'")
+            // Name the attribute the file actually uses: a <wsdl:import>
+            // carries `location`, not `schemaLocation`.
+            val attributeName = (value.parent as? com.intellij.psi.xml.XmlAttribute)?.localName ?: "schemaLocation"
+            holder.newAnnotation(HighlightSeverity.WARNING, "Cannot resolve $attributeName '${value.value}'")
                 .range(value.textRange)
                 .create()
             val file = value.containingFile

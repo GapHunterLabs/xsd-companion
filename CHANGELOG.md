@@ -4,6 +4,35 @@
 
 ## [Unreleased]
 
+## [0.3.0]
+
+### Fixed
+
+- **A WSDL showed nothing in the XSD Structure tool window.** A WSDL
+  keeps its schema one level down, inside `<wsdl:types>`, and the tool
+  window only ever read the root element's own children -- so for a
+  `.wsdl` file it found no declarations and followed no imports, which
+  is exactly the multi-file WSDL case this plugin is for. It now finds
+  every `<xs:schema>` in the file, including the several a WSDL may
+  carry, one per namespace.
+- **A WSDL split across WSDL files was not followed.** `<wsdl:import>`
+  carries `location`, not `schemaLocation`, so those references were
+  invisible to go-to-definition, to the unresolved-reference warning and
+  to the structure graph. All three now handle it, while `location` on
+  an unrelated element (a `<soap:address>` service endpoint, for
+  instance) is still left alone.
+- The unresolved-reference warning names the attribute that actually
+  failed, instead of always saying `schemaLocation`.
+- WSDL 2.0 (`http://www.w3.org/ns/wsdl`) is recognized alongside WSDL
+  1.1.
+
+### Added
+
+- Demo files for the WSDL case (`order-service.wsdl` +
+  `order-types.wsdl`), a walkthrough in `demo/README.md`, and tests that
+  read those demo files from disk so the walkthrough cannot drift from
+  what the code does.
+
 ## [0.2.0]
 
 ### Added
@@ -55,7 +84,8 @@
   file-extension guessing.
 - No telemetry, no license prompts, no network access.
 
-[Unreleased]: https://github.com/GapHunterLabs/xsd-companion/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/GapHunterLabs/xsd-companion/compare/0.3.0...HEAD
+[0.3.0]: https://github.com/GapHunterLabs/xsd-companion/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.3...0.2.0
 [0.1.3]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/GapHunterLabs/xsd-companion/compare/0.1.1...0.1.2
