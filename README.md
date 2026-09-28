@@ -3,6 +3,12 @@
 IntelliJ-family plugin. Go-to-definition and a real structure tree for
 XSD/WSDL schemas split across multiple files.
 
+![XSD Companion: Navigate XSD and WSDL schemas split across many files, with one tree for all of them](docs/media/hero.gif)
+
+Each feature on its own:
+[One tree for split schemas](docs/media/01-structure.gif) ·
+[WSDL across files](docs/media/02-wsdl.gif)
+
 ## Why it exists
 
 Multi-file schemas are where XSD/WSDL tooling tends to give up. The
