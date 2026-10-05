@@ -91,10 +91,12 @@ Schema/WSDL root). Ctrl+Click any `schemaLocation` value, or a
 "XSD Structure" tool window (right side) to see the full resolved
 structure across every included/imported file.
 
-## Enterprise / Team Licensing
+## Support
 
-Need enterprise features, custom validation rules, or team licensing?
-Contact us at **gaphunterlabs@gmail.com**.
+- **Bugs and feature requests:** [GitHub Issues](https://github.com/GapHunterLabs/xsd-companion/issues)
+- **Questions, or custom rules for a team's codebase:** **gaphunterlabs@gmail.com**
+- **Security vulnerabilities:** report privately as described in [SECURITY.md](SECURITY.md), not in a public issue.
+- **Privacy and network behavior:** [PRIVACY.md](PRIVACY.md)
 
 ## Development
 
